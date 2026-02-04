@@ -6,18 +6,28 @@ import { useState } from "react";
 export default function Home() {
 	const router = useRouter();
 	const items = [
-		{ img: "/imgs/diveIntoGif.gif", label: "diveIn", push: "/aquarium" },
-		{ img: "/imgs/friendsGif.gif", label: "friends", push: "/friends" },
-		{ img: "/imgs/aboutGif.gif", label: "about", push: "/about" },
+		{ img: "/imgs/realButton2.png", label: "Aquarium", push: "/aquarium" },
+		{ img: "/imgs/realButton2.png", label: "friends", push: "/friends" },
+		{ img: "/imgs/realButton2.png", label: "about", push: "/about" },
 	];
 	const [rotationOffset, setRotationOffset] = useState(0);
 	const radius = 180;
-	console.log(items.length);
 	return (
-		<div className="flex min-h-screen items-center justify-center font-sans ">
-			<main className="flex min-h-screen  h-screen w-full max-w-3xl flex-col items-center justify-between    sm:items-start">
+		<div className="flex  min-h-screen min-w-screen w-screen items-center justify-center font-sans ">
+			<main className=" min-h-screen h-screen w-9/10 flex flex-row  items-center justify-center sm:items-start overflow-hidden">
+				<Image
+					height={100}
+					width={100}
+					src={"/imgs/leftArrowBlue.gif"}
+					alt={"left arrow"}
+					className="self-center w-1/6 sm:p-10 cursor-grab"
+					onClick={() => {
+						setRotationOffset((prev) => prev - 1);
+					}}
+				/>
+
 				<motion.div
-					className="relative h-[900px] w-[900px]  rounded-full  bg-radial-[at_50%] from-[#A9E835]/60 to-70% "
+					className="relative h-full w-4/6  rounded-full  bg-radial-[at_50%]  from-[#A9E835]/60 to-70% overflow-hidden"
 					animate={{
 						scale: [1, 1.08, 1],
 						opacity: [0.8, 1, 0.8],
@@ -26,9 +36,6 @@ export default function Home() {
 						duration: 3,
 						repeat: Infinity,
 						ease: "easeInOut",
-					}}
-					onClick={() => {
-						setRotationOffset((prev) => prev + 1);
 					}}>
 					{items.map((item, i) => {
 						const angle = (360 / items.length) * (i + rotationOffset);
@@ -39,7 +46,7 @@ export default function Home() {
 						return (
 							<motion.div
 								key={i}
-								className="absolute left-1/4 top-2/5 "
+								className="absolute left-2/6 top-2/5 "
 								animate={{
 									x: Math.cos(angleRad) * radius,
 									y: Math.sin(angleRad) * radius,
@@ -48,18 +55,29 @@ export default function Home() {
 								}}
 								transition={{ duration: 0.3 }}>
 								<button
-									className="relative w-[180px] h-[180px]   bg-linear-to-b from-10% via-zinc-400 to-80% rounded-full p-2  hover:from-zinc-400 hover:via-transparent hover:to-zinc-400 hover:border-2 hover:border-dotted"
+									className={`relative w-[200px] h-[200px] items-center  bg-center bg-size-[205%_120%]  rounded-full p-2 cursor-grab`}
+									style={{ backgroundImage: `url(${item.img})` }}
 									disabled={!isActive}
 									onClick={(e) => {
 										e.stopPropagation();
 										router.push(item.push);
 									}}>
-									<Image fill src={item.img} alt={item.label} />
+									<h1 className="font-shift text-sm p-8 ">{item.label}</h1>
 								</button>{" "}
 							</motion.div>
 						);
 					})}
 				</motion.div>
+				<Image
+					height={100}
+					width={100}
+					src={"/imgs/rightArrowBlue.gif"}
+					alt={"right arrow"}
+					className="self-center w-1/6 sm:p-10 cursor-grab"
+					onClick={() => {
+						setRotationOffset((prev) => prev + 1);
+					}}
+				/>
 			</main>
 		</div>
 	);

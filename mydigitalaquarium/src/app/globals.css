@@ -10,6 +10,7 @@
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
+	--font-shift: "Shift-8OKn", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,7 +19,13 @@
 		--foreground: #ededed;
 	}
 }
-
+@font-face {
+	font-family: "Shift-8OKn";
+	font-style: normal;
+	font-weight: 200 700;
+	font-display: swap;
+	src: url("/fonts/Shift-8OKn.woff2") format("woff2");
+}
 .hover-about:hover {
 	cursor: url("/svgs/about-us.svg"), auto;
 }
